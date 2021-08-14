@@ -1,3 +1,9 @@
 load_from:
   # References the file copied into your Dockerfile
   - python_file: repos.py
+  # Add grpc config for new repos here:
+  # Sample:
+  # - grpc_server:
+  #     host: docker_example_pipelines
+  #     port: 4000
+  #     location_name: "example_pipelines"
