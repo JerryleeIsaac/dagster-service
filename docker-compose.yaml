@@ -1,0 +1,58 @@
+version: "3.1"
+
+services:
+  dagit:
+    image: dagster-service/dagit
+    build:
+      context: .
+      dockerfile: Dockerfile.dagit
+    volumes:
+      - ./dagster.yaml:/opt/dagster/dagster_home/dagster.yaml
+      - ./workspace.yaml:/opt/dagster/app/workspace.yaml
+    environment: 
+      - DAGSTER_PG_USERNAME=dagster
+      - DAGSTER_PG_PASSWORD=dagster
+      - DAGSTER_PG_HOST=postgres
+      - DAGSTER_PG_DB=dagster
+      - DAGSTER_PG_PORT=5432
+    networks:
+      - dagster-service
+    ports:
+      - 3000:3000
+    depends_on: 
+      - postgres
+
+  dagster-daemon:
+    image: dagster-service/dagster-daemon
+    build:
+      context: .
+      dockerfile: Dockerfile.dagster-daemon
+    volumes:
+      - ./dagster.yaml:/opt/dagster/dagster_home/dagster.yaml
+      - ./workspace.yaml:/opt/dagster/app/workspace.yaml
+    environment: 
+      - DAGSTER_PG_USERNAME=dagster
+      - DAGSTER_PG_PASSWORD=dagster
+      - DAGSTER_PG_HOST=postgres
+      - DAGSTER_PG_DB=dagster
+      - DAGSTER_PG_PORT=5432
+    networks:
+      - dagster-service
+    depends_on: 
+      - postgres
+    
+  postgres:
+    image: postgres:latest
+    volumes:
+      - ./db_data:/var/lib/postgresql/data 
+    networks:
+      - dagster-service
+    environment: 
+      - POSTGRES_USER=dagster
+      - POSTGRES_PASSWORD=dagster
+      - POSTGRES_DB=dagster
+
+networks:
+  dagster-service:
+    driver: bridge
+    name: dagster-service

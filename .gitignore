@@ -1,0 +1,7 @@
+.env
+.venv
+venv
+env
+dagster_home/*
+*__pycache__*
+*db_data/*

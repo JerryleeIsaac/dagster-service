@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dagster-service"
+version = "0.1.0"
+description = "My service template for dagster"
+authors = ["Jerrylee Isaac Geronimo <jerryleegeronimo@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+dagster = "^0.12.6"
+dagster-docker = "^0.12.6"
+dagster-postgres = "^0.12.6"
+dagit = "^0.12.6"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
