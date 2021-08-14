@@ -3,6 +3,7 @@ version: "3.1"
 services:
   dagit:
     image: dagster-service/dagit
+    container_name: dagster-service_dagit
     build:
       context: .
       dockerfile: Dockerfile.dagit
@@ -24,6 +25,7 @@ services:
 
   dagster-daemon:
     image: dagster-service/dagster-daemon
+    container_name: dagster-service_dagster-daemon
     build:
       context: .
       dockerfile: Dockerfile.dagster-daemon
@@ -33,7 +35,7 @@ services:
     environment: 
       - DAGSTER_PG_USERNAME=dagster
       - DAGSTER_PG_PASSWORD=dagster
-      - DAGSTER_PG_HOST=postgres
+      - DAGSTER_PG_HOST=dagster-service_postgres
       - DAGSTER_PG_DB=dagster
       - DAGSTER_PG_PORT=5432
     networks:
@@ -43,6 +45,7 @@ services:
     
   postgres:
     image: postgres:latest
+    container_name: dagster-service_postgres
     volumes:
       - ./db_data:/var/lib/postgresql/data 
     networks:

@@ -1,0 +1,27 @@
+version: "3.1"
+
+services:
+  dagit:
+    networks:
+      - dagster-service
+
+      # Add new entries here
+      # See sample:
+      # - sample-service
+
+  dagster-daemon:
+    networks:
+      - dagster-service
+
+      # Add new entries here
+      # See sample:
+      # - sample-service
+
+
+
+networks:
+  # Add new entries below
+  # See sample
+  # sample-service:
+  #   external: true
+  #   driver: bridge
