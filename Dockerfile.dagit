@@ -6,6 +6,9 @@ RUN pip install --user -r requirements.txt
 
 FROM python:3.8-slim as run
 
+# Install postgres dependencies
+RUN apt-get update && apt-get install libpq-dev -y
+
 # COPY installation
 COPY --from=build /root/.local /root/.local
 
