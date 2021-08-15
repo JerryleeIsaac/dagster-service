@@ -1,11 +1,16 @@
-FROM python:3.8-slim
-
-# Create dagster workspace
-RUN mkdir -p /opt/dagster/dagster_home /opt/dagster/app
+FROM python:3.8 as build
 
 # Install dependencies
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --user -r requirements.txt
+
+FROM python:3.8-slim as run
+
+# COPY installation
+COPY --from=build /root/.local /root/.local
+
+# Create dagster workspace
+RUN mkdir -p /opt/dagster/dagster_home /opt/dagster/app
 
 # Copy dagster instance YAML to $DAGSTER_HOME
 COPY dagster.yaml /opt/dagster/dagster_home/
@@ -19,4 +24,5 @@ COPY repos.py repos.py
 WORKDIR /opt/dagster/app
 ENV DAGSTER_HOME=/opt/dagster/dagster_home/
 EXPOSE 3000
+ENV PATH=/root/.local/bin:$PATH
 ENTRYPOINT ["dagit", "-h", "0.0.0.0", "-p", "3000"]
