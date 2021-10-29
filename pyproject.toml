@@ -10,6 +10,8 @@ dagster = "^0.13.2"
 dagster-docker = "^0.13.2"
 dagster-postgres = "^0.13.2"
 dagit = "^0.13.2"
+grpcio = "1.32.0"
+
 
 [tool.poetry.dev-dependencies]
 
