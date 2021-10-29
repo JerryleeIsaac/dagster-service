@@ -6,3 +6,4 @@ dagster_home/*
 *__pycache__*
 *db_data/*
 workspace.yaml
+docker-compose.repos.yaml
