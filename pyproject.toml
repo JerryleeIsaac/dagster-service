@@ -6,10 +6,10 @@ authors = ["Jerrylee Isaac Geronimo <jerryleegeronimo@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-dagster = "^0.13.2"
-dagster-docker = "^0.13.2"
-dagster-postgres = "^0.13.2"
-dagit = "^0.13.2"
+dagster = "^0.14.0"
+dagster-docker = "^0.14.0"
+dagster-postgres = "^0.14.0"
+dagit = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
 
