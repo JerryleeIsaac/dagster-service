@@ -5,13 +5,12 @@ def hello():
     return "hello"
 
 @solid
-def world():
-    return "world"
+def world(hello):
+    return hello + "world"
 
 @pipeline(name="hello_world_pipeline")
 def hello_world_pipeline():
-    hello()
-    world()
+    world(hello())
 
 
 @repository(name="hello_world_repo")
